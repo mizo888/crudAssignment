@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>[[${pageTitle}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div><h2 class="m-2 text-center">[[${pageTitle}]]</h2></div>
+
+    <form th:action="@{/cities/save}" method="post" th:object="${location}"
+          style="max-width: 700px; margin: 0 auto;" >
+        <input type="hidden" th:field="*{ID}">
+        <div class="border border-secondary rounded p-3">
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label h2 text-center">Name</label>
+              <div class="col-sm-8">
+                      <input type="text" placeholder="Enter your name"  th:field="*{name}" name="name" class="form-control" required maxlength="20">
+              </div>
+          </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label h2 text-center" >Address</label>
+                <div class="col-sm-8">
+                    <input type="text" placeholder="Enter your address"  th:field="*{address}" class="form-control" required maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label h2 text-center"  for="city choice" style="height: 30px;">Choose city:</label>
+                <div class="col-sm-8" >
+                    <input style="width: 436px;" class="form-check-label form-control" list="cities" id="city choice" name="city"  type="text"
+                           placeholder="City" th:field="*{city}"  required/>
+                    <datalist id="cities">
+                        <option value="Berlin">
+                        <option value="Amsterdam">
+                        <option value="Ljubljana">
+                        <option value="Belgrade">
+                        <option value="Zagreb">
+                        <option value="Sarajevo">
+                        <option value="Prishtina">
+                        <option value="Rome">
+                        <option value="Paris">
+                        <option value="Madrid">
+                        <option value="Istanbul">
+                        <option value="Moscow">
+                        <option value="Stockholm">
+                    </datalist>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label h2 text-center">Longitude</label>
+                <div class="col-sm-8">
+                    <input  placeholder="Input longitude" autocomplete="off"  th:field="*{longitude}" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label h2 text-center">Latitude</label>
+                <div class="col-sm-8">
+                    <input  placeholder="Input latitude"   th:field="*{latitude}" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="text-lg-end m-3">
+                <button type="submit" class="btn btn-primary m-1">Save</button>
+                <button type="button" class="btn btn-secondary m-1" onclick="cancelForm()">Cancel</button>
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location ="[[@{/cities}]]";
+    }
+</script>
+</body>
+</html>
+
+
+
+<!--
+<div class="form-group row">
+    <label class="col-sm-4 col-form-label h2">City</label>
+    <div class="col-sm-8">
+        <select  name="Choose city" required id="cit" class="form-control" >
+
+            <option value="">Select city</option>
+            <option
+                    th:each="location : ${dropdown}"
+                    th:text="${location.city}">
+            </option>
+        </select>
+    </div>
+</div>-->
+
+
+<!--
+<div class="form-group row">
+    <label class="col-sm-4 col-form-label h2">City</label>
+    <div class="col-sm-8">
+        <input type="text" placeholder="Enter your city"  th:field="*{city}" class="form-control" required >
+    </div>
+</div>-->
